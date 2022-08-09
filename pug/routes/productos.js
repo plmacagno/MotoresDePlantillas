@@ -2,6 +2,8 @@ const { Router } = require('express');
 
 const router = Router();
 
+const ProductoMem = require('../classProductMem');
+
 let productos = [];
 
 router.get('', (req, res) => {
@@ -10,6 +12,7 @@ router.get('', (req, res) => {
 
 router.get('/productos', (req, res) => {
     res.render('productos', { productos });
+
 })
 
 router.post('/productos', (req, res) => {

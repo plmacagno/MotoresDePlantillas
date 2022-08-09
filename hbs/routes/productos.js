@@ -1,6 +1,6 @@
 const { Router } = require('express');
-
 const router = Router();
+const ProductoMem = require('../classProductMem');
 
 let productos = [];
 
@@ -9,13 +9,20 @@ router.get('/', (req, res) => {
 })
 
 router.get('/productos', (req, res) => {
+   
     res.render('productos', { productos });
+    
 })
 
-router.post('/productos', (req, res) => {
-    const { name, price, picture } = req.body;
-    productos.push({ name, price, picture });
-    res.render('form');
+router.post('/productos', async (req, res) => {
+    try{
+        const { name, price, picture } = req.body;
+        const produ = { name, price, picture };
+        productos.push(produ);
+        res.render('form');
+    } catch (error) {
+        console.log(error.message);
+    }       
 })
 
 module.exports = router;
